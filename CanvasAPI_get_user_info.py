@@ -45,8 +45,9 @@ for id in current_courses:
         if assignment.due_at:
             x = [assignment.due_at, course.name, assignment.name]
             current_assignments.append(x)
-
 sorted_assignments = sorted(current_assignments, key = lambda x: x[0])
-for assignment in sorted_assignments:
-    print(assignment[0], assignment[1], assignment[2])
+
+## to view assignments 
+""" for assignment in sorted_assignments:
+    print(assignment[0], assignment[1], assignment[2]) """
 
