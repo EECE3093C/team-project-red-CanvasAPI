@@ -58,4 +58,5 @@ sorted_assignments = sorted(current_assignments, key = lambda x: x[0]) # This is
 events = canvas.get_calendar_events()
 print('x')
 for event in events:
-    print('test')   
+    print('test')    
+
