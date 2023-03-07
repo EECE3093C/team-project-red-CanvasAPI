@@ -13,15 +13,6 @@ from canvasapi.user import User, UserDisplay
 from canvasapi.util import combine_kwargs, obj_or_id
 
 
-
-
-
-
-
-# API URL
-API_URL = 'https://uc.instructure.com'
-
-
 class CanvasAPI(object):
     def __init__(self, API_KEY, API_URL):
         # API URL
@@ -74,7 +65,7 @@ if __name__ == '__main__':
    
     API_KEY = '1109~8XCwn02uDMRouJecaJILOnr17FPD16u67HxaPHYS6yhh4XVeJmF1y0mOrQOHy08f' # chloe's for testing
     API_URL = 'https://uc.instructure.com' # API URL
-    
+
     chloe = CanvasAPI(API_KEY, API_URL)
     print(chloe.get_assignments())
     
