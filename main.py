@@ -13,6 +13,10 @@ from canvasapi.user import User, UserDisplay
 from canvasapi.util import combine_kwargs, obj_or_id
 
 
+# API URL
+API_URL = 'https://uc.instructure.com'
+
+
 class CanvasAPI(object):
     def __init__(self, API_KEY, API_URL):
         # API URL
@@ -36,14 +40,19 @@ class CanvasAPI(object):
         for id in CanvasAPI.get_courses(self):
             course = self.canvas.get_course(id)
             # retrieve all assignments in the course with due dates included
-            assignments = course.get_assignments(include=['due_dates'])
+            assignments = course.get_assignments()
             # Iterate over assignments, selecting only the ones with due dates
+
+            # canvasapi get_assignment(bucket='unsubmitted') is broken on the api side
+            # need to find a work around to filter out submitted assignments
+            # doing the if assignment.has_submitted_submissions check works on assignments that require submissions 
+            # NOTE: not all assignments require submissions
             for assignment in assignments:
                 if assignment.due_at:
                     x = [assignment.due_at, course.name, assignment.name]
                     current_assignments.append(x)
         sorted_assignments = sorted(current_assignments, key = lambda x: x[0]) # This is too slow
-        
+
         return sorted_assignments
     
     def get_todo(self):
@@ -64,8 +73,9 @@ class CanvasAPI(object):
 if __name__ == '__main__':
    
     API_KEY = '1109~8XCwn02uDMRouJecaJILOnr17FPD16u67HxaPHYS6yhh4XVeJmF1y0mOrQOHy08f' # chloe's for testing
+    ''' API_KEY = input("Enter your API key for canvas: ")'''
+    
     API_URL = 'https://uc.instructure.com' # API URL
-
     chloe = CanvasAPI(API_KEY, API_URL)
     print(chloe.get_assignments())
     
